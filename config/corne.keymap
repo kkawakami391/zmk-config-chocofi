@@ -85,7 +85,7 @@
         keymap {
                 compatible = "zmk,keymap";
 
-                home {
+                HOME {
                         // -----------------------------------------------------------------------------------------
                         // |  TAB |  Q  |  W  |  E  |  R  |  T  |   |  Y  |  U   |  I  |  O  |  P  | BSPC |
                         // | CTRL |  A  |  S  |  D  |  F  |  G  |   |  H  |  J   |  K  |  L  |  ;  |  '   |
@@ -97,10 +97,9 @@
                         &none  &kp Z &kp X &kp C &kp V &kp B   &kp N &kp M  &kp COMMA &kp DOT &kp FSLH &none
                         &kp ESCAPE &lt 3 SPACE &lt 2 TAB   &lt 1 RET &kp BSPC &lt 4 SQT
                         >;
-
-                        label = "home";
                 };
-                sym {
+
+                SYM {
                         // -----------------------------------------------------------------------------------------
                         // |  TAB |  1  |  2  |  3  |  4  |  5  |   |  6  |  7  |  8  |  9  |  0  | BSPC |
                         // | BTCLR| BT1 | BT2 | BT3 | BT4 | BT5 |   | LFT | DWN |  UP | RGT |     |      |
@@ -112,11 +111,9 @@
                         &none  &kp PERCENT   &kp UNDER    &kp LEFT_BRACKET   &kp RIGHT_BRACKET      &kp GRAVE   &none &none &none &none &none &none
                         &kp BACKSLASH  &kp TILDE     &kp CARET      &none    &none      &none
                         >;
-
-                        label = "sym";
                 };
 
-                num {
+                NUM {
                         // -----------------------------------------------------------------------------------------
                         // |  TAB |  !  |  @  |  #  |  $  |  %  |   |  ^  |  &  |  *  |  (  |  )  | BSPC |
                         // | CTRL |     |     |     |     |     |   |  -  |  =  |  [  |  ]  |  \  |  `   |
@@ -128,11 +125,9 @@
                         &none &none &none &none &none &none        &kp EQUAL  &kp N1  &kp N2  &kp N3  &kp BACKSLASH  &none
                         &none &none &none   &kp DOT   &kp N0    &kp COMMA
                         >;
-
-                        label = "num";
                 };
 
-                funcs {
+                FUNCS {
                         // -----------------------------------------------------------------------------------------
                         // |  TAB |  !  |  @  |  #  |  $  |  %  |   |  ^  |  &  |  *  |  (  |  )  | BSPC |
                         // | CTRL |     |     |     |     |     |   |  -  |  =  |  [  |  ]  |  \  |  `   |
@@ -144,11 +139,9 @@
                         &none &none &none &none &none &none        &kp F10  &kp F1  &kp F2  &kp F3  &none  &none
                         &none &none &none   &kp DOT   &kp N0    &kp COMMA
                         >;
-
-                        label = "funcs";
                 };
 
-                settings {
+                SETTINGS {
                         // -----------------------------------------------------------------------------------------
                         // |  TAB |  1  |  2  |  3  |  4  |  5  |   |  6  |  7  |  8  |  9  |  0  | BSPC |
                         // | BTCLR| BT1 | BT2 | BT3 | BT4 | BT5 |   | LFT | DWN |  UP | RGT |     |      |
@@ -156,12 +149,10 @@
                         //                    | GUI |     | SPC |   | ENT |     | ALT |
                         bindings = <
                         &none  &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4    &none &none &none &none &none &none
-                        &none  &none  &none  &bt BT_PRV  &bt BT_NXT &bt BT_CLR    &kp LEFT_ARROW &kp DOWN &kp UP &kp RIGHT_ARROW &none &none
-                        &none  &none  &none  &none  &none  &none   &none &none &kp PG_DN &kp PG_UP &none &none
+                        &none  &trans  &trans  &trans  &trans &none    &kp LEFT_ARROW &kp DOWN &kp UP &kp RIGHT_ARROW &none &none
+                        &none  &none  &none  &bt BT_PRV  &bt BT_NXT &bt BT_CLR   &none &none &kp PG_DN &kp PG_UP &none &none
                         &none  &none  &none  &none  &none  &none
                         >;
-
-                        label = "settings";
                 };
 
         };
