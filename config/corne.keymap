@@ -17,7 +17,7 @@
 #define SETTINGS 4
 
 // BT preferences
-#define OUTBLE   &out OUT_BLE // keyboard output bluetooth
+// #define OUTBLE &out OUT_BLE // keyboard output bluetooth
 
 / {
         behaviors {
