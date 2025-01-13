@@ -97,6 +97,8 @@
                         &none  &kp Z &kp X &kp C &kp V &kp B   &kp N &kp M  &kp COMMA &kp DOT &kp FSLH &none
                         &kp ESCAPE &lt 3 SPACE &lt 2 TAB   &lt 1 RET &kp BSPC &lt 4 SQT
                         >;
+
+                        label = "HOME";
                 };
 
                 SYM {
@@ -111,6 +113,8 @@
                         &none  &kp PERCENT   &kp UNDER    &kp LEFT_BRACKET   &kp RIGHT_BRACKET      &kp GRAVE   &none &none &none &none &none &none
                         &kp BACKSLASH  &kp TILDE     &kp CARET      &none    &none      &none
                         >;
+
+                        label = "SYM";
                 };
 
                 NUM {
@@ -125,6 +129,8 @@
                         &none &none &none &none &none &none        &kp EQUAL  &kp N1  &kp N2  &kp N3  &kp BACKSLASH  &none
                         &none &none &none   &kp DOT   &kp N0    &kp COMMA
                         >;
+
+                        label = "NUM";
                 };
 
                 FUNCS {
@@ -139,6 +145,8 @@
                         &none &none &none &none &none &none        &kp F10  &kp F1  &kp F2  &kp F3  &none  &none
                         &none &none &none   &kp DOT   &kp N0    &kp COMMA
                         >;
+
+                        label = "FUNCS";
                 };
 
                 SETTINGS {
@@ -153,6 +161,8 @@
                         &none  &none  &none  &bt BT_PRV  &bt BT_NXT &bt BT_CLR   &none &none &kp PG_DN &kp PG_UP &none &none
                         &none  &none  &none  &none  &none  &none
                         >;
+
+                        label = "SETTINGS";
                 };
 
         };
