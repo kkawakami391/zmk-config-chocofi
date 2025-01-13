@@ -17,7 +17,7 @@
 #define SETTINGS 4
 
 // BT preferences
-// #define OUTBLE &out OUT_BLE // keyboard output bluetooth
+#define OUTBLE &out OUT_BLE // keyboard output bluetooth
 
 / {
         behaviors {
@@ -110,7 +110,7 @@
                         &none  &kp EXCL     &kp AT        &kp LEFT_BRACE     &kp RIGHT_BRACE        &kp PIPE    &none &none &none &none &none &none
                         &none  &kp HASH  &kp DOLLAR  &kp LEFT_PARENTHESIS    &kp RIGHT_PARENTHESIS  &kp AMPS    &none &trans &trans &trans  &trans &none
                         &none  &kp PERCENT   &kp UNDER    &kp LEFT_BRACKET   &kp RIGHT_BRACKET      &kp GRAVE   &none &none &none &none &none &none
-                        &BACKSLASH  &kp TILDE     &kp CARET      &none    &none      &none
+                        &kp BACKSLASH  &kp TILDE     &kp CARET      &none    &none      &none
                         >;
 
                         label = "sym";
