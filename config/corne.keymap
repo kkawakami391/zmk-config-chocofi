@@ -8,6 +8,8 @@
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/outputs.h>
+#include <dt-bindings/zmk/pointing.h>
+#include <dt-bindings/zmk/mouse.h>
 
 // layers
 #define BASE 0
@@ -15,152 +17,173 @@
 #define NUM 2
 #define FUNCS 3
 #define SETTINGS 4
+#define MOUSE 5
+
+// Mouse settings
+#define ZMK_POINTING_DEFAULT_MOVE_VAL 1500  // default: 600
+#define ZMK_POINTING_DEFAULT_SCRL_VAL 20    // default: 10
 
 / {
-        behaviors {
-                hm: homerow_mods {
-                        compatible = "zmk,behavior-hold-tap";
-                        label = "HOMEROW_MODS";
-                        bindings = <&kp>, <&kp>;
+    behaviors {
+        hm: homerow_mods {
+            compatible = "zmk,behavior-hold-tap";
+            label = "HOMEROW_MODS";
+            bindings = <&kp>, <&kp>;
 
-                        #binding-cells = <2>;
-                        tapping-term-ms = <200>;
-                        flavor = "tap-preferred";
-                        require-prior-idle-ms = <125>;
-                        quick-tap-ms = <200>;
-                };
-
-                shifthr: shifthr {
-                        compatible = "zmk,behavior-hold-tap";
-                        label = "SHIFTHR";
-                        bindings = <&kp>, <&kp>;
-
-                        #binding-cells = <2>;
-                        tapping-term-ms = <175>;
-                        flavor = "tap-preferred";
-                        quick-tap-ms = <175>;
-                };
-
-                weak: weak {
-                        compatible = "zmk,behavior-hold-tap";
-                        label = "WEAK";
-                        bindings = <&kp>, <&kp>;
-
-                        #binding-cells = <2>;
-                        tapping-term-ms = <230>;
-                        flavor = "tap-preferred";
-                        require-prior-idle-ms = <125>;
-                        quick-tap-ms = <230>;
-                };
+            #binding-cells = <2>;
+            tapping-term-ms = <200>;
+            flavor = "tap-preferred";
+            require-prior-idle-ms = <125>;
+            quick-tap-ms = <200>;
         };
 
-        combos {
-                compatible = "zmk,combos";
+        shifthr: shifthr {
+            compatible = "zmk,behavior-hold-tap";
+            label = "SHIFTHR";
+            bindings = <&kp>, <&kp>;
 
-                caps {
-                        bindings = <&kp CAPS>;
-                        key-positions = <15 20>; // key: D, K
-                };
-
-                // escape {
-                        //         bindings = <&kp ESCAPE>;
-                        //         key-positions = <1 2>; // key: Q, W
-                // };
-
-
-                under {
-                        bindings = <&kp UNDER>;
-                        key-positions = <28 31>; // key: V, M
-                };
-
-                dash {
-                        bindings = <&kp MINUS>;
-                        key-positions = <4 7>; // key: R, U
-                };
+            #binding-cells = <2>;
+            tapping-term-ms = <175>;
+            flavor = "tap-preferred";
+            quick-tap-ms = <175>;
         };
 
-        keymap {
-                compatible = "zmk,keymap";
+        weak: weak {
+            compatible = "zmk,behavior-hold-tap";
+            label = "WEAK";
+            bindings = <&kp>, <&kp>;
 
-                home {
-                        // -----------------------------------------------------------------------------------------
-                        // |  TAB |  Q  |  W  |  E  |  R  |  T  |   |  Y  |  U   |  I  |  O  |  P  | BSPC |
-                        // | CTRL |  A  |  S  |  D  |  F  |  G  |   |  H  |  J   |  K  |  L  |  ;  |  '   |
-                        // | SHFT |  Z  |  X  |  C  |  V  |  B  |   |  N  |  M   |  ,  |  .  |  /  | ESC  |
-                        //                    | ESC | SPC | TAB |   | ENT | BSP  | QOT |
-                        bindings = <
-                        &none  &kp Q &kp W &kp E &kp R &kp T   &kp Y &kp U  &kp I   &kp O  &kp P   &none
-                        &none  &weak LWIN A &weak LALT S &shifthr LSHFT D &shifthr LCTRL F &kp G   &kp H &shifthr RCTRL J  &shifthr RSHFT K   &weak RALT L   &weak RWIN SEMI  &none
-                        &none  &kp Z &kp X &kp C &kp V &kp B   &kp N &kp M  &kp COMMA &kp DOT &kp FSLH &none
-                        &kp ESCAPE &lt 3 SPACE &lt 2 TAB   &lt 1 RET &kp BSPC &lt 4 SQT
-                        >;
-
-                        label = "HOME";
-                };
-
-                sym {
-                        // -----------------------------------------------------------------------------------------
-                        // |  TAB |  1  |  2  |  3  |  4  |  5  |   |  6  |  7  |  8  |  9  |  0  | BSPC |
-                        // | BTCLR| BT1 | BT2 | BT3 | BT4 | BT5 |   | LFT | DWN |  UP | RGT |     |      |
-                        // | SHFT |     |     |     |     |     |   |     |     |     |     |     |      |
-                        //                    | GUI |     | SPC |   | ENT |     | ALT |
-                        bindings = <
-                        &none  &kp EXCL     &kp AT        &kp LEFT_BRACE     &kp RIGHT_BRACE        &kp PIPE    &none &none &none &none &none &none
-                        &none  &kp HASH  &kp DOLLAR  &kp LEFT_PARENTHESIS    &kp RIGHT_PARENTHESIS  &kp AMPS    &none &trans &trans &trans  &trans &none
-                        &none  &kp PERCENT   &kp UNDER    &kp LEFT_BRACKET   &kp RIGHT_BRACKET      &kp GRAVE   &none &none &none &none &none &none
-                        &kp BACKSLASH  &kp TILDE     &kp CARET      &none    &none      &none
-                        >;
-
-                        label = "SYM";
-                };
-
-                num {
-                        // -----------------------------------------------------------------------------------------
-                        // |  TAB |  !  |  @  |  #  |  $  |  %  |   |  ^  |  &  |  *  |  (  |  )  | BSPC |
-                        // | CTRL |     |     |     |     |     |   |  -  |  =  |  [  |  ]  |  \  |  `   |
-                        // | SHFT |     |     |     |     |     |   |  _  |  +  |  {  |  }  | "|" |  ~   |
-                        //                    | GUI |     | SPC |   | ENT |     | ALT |
-                        bindings = <
-                        &none &none &none &none &none &none        &kp PLUS   &kp N7  &kp N8  &kp N9  &kp ASTERISK   &none
-                        &none &trans &trans &trans  &trans &none   &kp MINUS  &kp N4  &kp N5  &kp N6  &kp COLON      &none
-                        &none &none &none &none &none &none        &kp EQUAL  &kp N1  &kp N2  &kp N3  &kp BACKSLASH  &none
-                        &none &none &none   &kp DOT   &kp N0    &kp COMMA
-                        >;
-
-                        label = "NUM";
-                };
-
-                funcs {
-                        // -----------------------------------------------------------------------------------------
-                        // |  TAB |  !  |  @  |  #  |  $  |  %  |   |  ^  |  &  |  *  |  (  |  )  | BSPC |
-                        // | CTRL |     |     |     |     |     |   |  -  |  =  |  [  |  ]  |  \  |  `   |
-                        // | SHFT |     |     |     |     |     |   |  _  |  +  |  {  |  }  | "|" |  ~   |
-                        //                    | GUI |     | SPC |   | ENT |     | ALT |
-                        bindings = <
-                        &none &none &none &none &none &none        &kp F12  &kp F7  &kp F8  &kp F9  &none  &none
-                        &none &trans &trans &kp DEL  &trans &none   &kp F11  &kp F4  &kp F5  &kp F6  &none  &none
-                        &none &none &none &none &none &none        &kp F10  &kp F1  &kp F2  &kp F3  &none  &none
-                        &none &none &none   &kp DOT   &kp N0    &kp COMMA
-                        >;
-
-                        label = "FUNCS";
-                };
-
-                settings {
-                        // -----------------------------------------------------------------------------------------
-                        // |  TAB |  1  |  2  |  3  |  4  |  5  |   |  6  |  7  |  8  |  9  |  0  | BSPC |
-                        // | BTCLR| BT1 | BT2 | BT3 | BT4 | BT5 |   | LFT | DWN |  UP | RGT |     |      |
-                        // | SHFT |     |     |     |     |     |   |     |     |     |     |     |      |
-                        //                    | GUI |     | SPC |   | ENT |     | ALT |
-                        bindings = <
-                        &none  &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4    &none &none &none &none &none &none
-                        &none  &trans  &trans  &trans  &trans &none    &kp LEFT_ARROW &kp DOWN &kp UP &kp RIGHT_ARROW &none &none
-                        &none  &none  &none  &bt BT_PRV  &bt BT_NXT &bt BT_CLR   &kp HOME &kp PG_DN &kp PG_UP &kp END &none &none
-                        &none  &none  &out OUT_BLE  &none  &none  &none
-                        >;
-
-                        label = "SETTINGS";
-                };
-
+            #binding-cells = <2>;
+            tapping-term-ms = <230>;
+            flavor = "tap-preferred";
+            require-prior-idle-ms = <125>;
+            quick-tap-ms = <230>;
         };
+    };
+
+    combos {
+        compatible = "zmk,combos";
+
+        caps {
+            bindings = <&kp CAPS>;
+            key-positions = <15 20>; // key: D, K
+        };
+
+        // escape {
+            //         bindings = <&kp ESCAPE>;
+            //         key-positions = <1 2>; // key: Q, W
+        // };
+
+
+        under {
+            bindings = <&kp UNDER>;
+            key-positions = <28 31>; // key: V, M
+        };
+
+        dash {
+            bindings = <&kp MINUS>;
+            key-positions = <4 7>; // key: R, U
+        };
+    };
+
+    keymap {
+        compatible = "zmk,keymap";
+
+        home {
+            // -----------------------------------------------------------------------------------------
+            // |  TAB |  Q  |  W  |  E  |  R  |  T  |   |  Y  |  U   |  I  |  O  |  P  | BSPC |
+            // | CTRL |  A  |  S  |  D  |  F  |  G  |   |  H  |  J   |  K  |  L  |  ;  |  '   |
+            // | SHFT |  Z  |  X  |  C  |  V  |  B  |   |  N  |  M   |  ,  |  .  |  /  | ESC  |
+            //                    | ESC | SPC | TAB |   | ENT | BSP  | QOT |
+            bindings = <
+            &none  &kp Q &kp W &kp E &kp R &kp T   &kp Y &kp U  &kp I   &kp O  &kp P   &none
+            &none  &weak LWIN A &weak LALT S &shifthr LSHFT D &shifthr LCTRL F &kp G   &kp H &shifthr RCTRL J  &shifthr RSHFT K   &weak RALT L   &weak RWIN SEMI  &none
+            &none  &kp Z &kp X &kp C &kp V &kp B   &kp N &kp M  &kp COMMA &kp DOT &kp FSLH &none
+            &lt 5 ESCAPE &lt 3 SPACE &lt 2 TAB   &lt 1 RET &kp BSPC &lt 4 SQT
+            >;
+
+            label = "HOME";
+        };
+
+        sym {
+            // -----------------------------------------------------------------------------------------
+            // |  TAB |  1  |  2  |  3  |  4  |  5  |   |  6  |  7  |  8  |  9  |  0  | BSPC |
+            // | BTCLR| BT1 | BT2 | BT3 | BT4 | BT5 |   | LFT | DWN |  UP | RGT |     |      |
+            // | SHFT |     |     |     |     |     |   |     |     |     |     |     |      |
+            //                    | GUI |     | SPC |   | ENT |     | ALT |
+            bindings = <
+            &none  &kp EXCL     &kp AT        &kp LEFT_BRACE     &kp RIGHT_BRACE        &kp PIPE    &none &none &none &none &none &none
+            &none  &kp HASH  &kp DOLLAR  &kp LEFT_PARENTHESIS    &kp RIGHT_PARENTHESIS  &kp AMPS    &none &trans &trans &trans  &trans &none
+            &none  &kp PERCENT   &kp UNDER    &kp LEFT_BRACKET   &kp RIGHT_BRACKET      &kp GRAVE   &none &none &none &none &none &none
+            &kp BACKSLASH  &kp TILDE     &kp CARET      &none    &none      &none
+            >;
+
+            label = "SYM";
+        };
+
+        num {
+            // -----------------------------------------------------------------------------------------
+            // |  TAB |  !  |  @  |  #  |  $  |  %  |   |  ^  |  &  |  *  |  (  |  )  | BSPC |
+            // | CTRL |     |     |     |     |     |   |  -  |  =  |  [  |  ]  |  \  |  `   |
+            // | SHFT |     |     |     |     |     |   |  _  |  +  |  {  |  }  | "|" |  ~   |
+            //                    | GUI |     | SPC |   | ENT |     | ALT |
+            bindings = <
+            &none &none &none &none &none &none        &kp PLUS   &kp N7  &kp N8  &kp N9  &kp ASTERISK   &none
+            &none &trans &trans &trans  &trans &none   &kp MINUS  &kp N4  &kp N5  &kp N6  &kp COLON      &none
+            &none &none &none &none &none &none        &kp EQUAL  &kp N1  &kp N2  &kp N3  &kp BACKSLASH  &none
+            &none &none &none   &kp DOT   &kp N0    &kp COMMA
+            >;
+
+            label = "NUM";
+        };
+
+        funcs {
+            // -----------------------------------------------------------------------------------------
+            // |  TAB |  !  |  @  |  #  |  $  |  %  |   |  ^  |  &  |  *  |  (  |  )  | BSPC |
+            // | CTRL |     |     |     |     |     |   |  -  |  =  |  [  |  ]  |  \  |  `   |
+            // | SHFT |     |     |     |     |     |   |  _  |  +  |  {  |  }  | "|" |  ~   |
+            //                    | GUI |     | SPC |   | ENT |     | ALT |
+            bindings = <
+            &none &none &none &none &none &none        &kp F12  &kp F7  &kp F8  &kp F9  &none  &none
+            &none &trans &trans &kp DEL  &trans &none   &kp F11  &kp F4  &kp F5  &kp F6  &none  &none
+            &none &none &none &none &none &none        &kp F10  &kp F1  &kp F2  &kp F3  &none  &none
+            &none &none &none   &kp DOT   &kp N0    &kp COMMA
+            >;
+
+            label = "FUNCS";
+        };
+
+        settings {
+            // -----------------------------------------------------------------------------------------
+            // |  TAB |  1  |  2  |  3  |  4  |  5  |   |  6  |  7  |  8  |  9  |  0  | BSPC |
+            // | BTCLR| BT1 | BT2 | BT3 | BT4 | BT5 |   | LFT | DWN |  UP | RGT |     |      |
+            // | SHFT |     |     |     |     |     |   |     |     |     |     |     |      |
+            //                    | GUI |     | SPC |   | ENT |     | ALT |
+            bindings = <
+            &none  &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4    &none &none &none &none &none &none
+            &none  &trans  &trans  &trans  &trans &none    &kp LEFT_ARROW &kp DOWN &kp UP &kp RIGHT_ARROW &none &none
+            &none  &none  &none  &bt BT_PRV  &bt BT_NXT &bt BT_CLR   &kp HOME &kp PG_DN &kp PG_UP &kp END &none &none
+            &none  &none  &out OUT_BLE  &none  &none  &none
+            >;
+
+            label = "SETTINGS";
+        };
+
+        mouse {
+            // -----------------------------------------------------------------------------------------
+            // |  TAB |  !  |  @  |  #  |  $  |  %  |   |  ^  |  &  |  *  |  (  |  )  | BSPC |
+            // | CTRL |     |     |     |     |     |   |  -  |  =  |  [  |  ]  |  \  |  `   |
+            // | SHFT |     |     |     |     |     |   |  _  |  +  |  {  |  }  | "|" |  ~   |
+            //                    | GUI |     | SPC |   | ENT |     | ALT |
+            bindings = <
+            &none &none &none &none &none &none        &none &mkp MB4  &none  &none  &mkp MB5  &none
+            &none &trans &trans &trans  &trans &none   &none &mmv MOVE_LEFT  &mmv MOVE_DOWN  &mmv MOVE_UP  &mmv MOVE_RIGHT  &none
+            &none &none &none &none &none &none        &none &msc SCRL_LEFT  &msc SCRL_DOWN  &msc SCRL_UP  &msc SCRL_RIGHT  &none
+            &none &none &none   &mkp LCLK   &mkp RCLK    &mkp MCLK
+            >;
+
+            label = "MOUSE";
+        };
+
+    };
 };
