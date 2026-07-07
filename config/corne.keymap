@@ -87,7 +87,7 @@
         };
 
         enie {
-            bindings = <&kp N_TILDE>; // Usa N_TILDE para ñ
+            bindings = <&kp SEMI>; // En distribución ES, esta tecla produce ñ
             key-positions = <20 21>;   // Posiciones físicas de K y L (ajusta según tu matriz)
             timeout-ms = <50>;         // Más corto que tus HRM para evitar conflictos
         };
