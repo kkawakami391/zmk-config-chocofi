@@ -117,7 +117,7 @@
             //                    | ESC | SPC | TAB |   | ENT | BSP  | QOT |
             bindings = <
             &none  &kp Q &kp W &kp E &kp R &kp T   &kp Y &kp U  &kp I   &kp O  &kp P   &none
-            &none  &weak LWIN A &weak LALT S &shifthr LSHFT D &shifthr LCTRL F &kp G   &kp H &shifthr RCTRL J  &shifthr RSHFT K   &weak RALT L   &weak RWIN SEMI  &none
+            &none  &weak LWIN A &weak LALT S &shifthr LSHFT D &shifthr LCTRL F &kp G   &kp H &shifthr RCTRL J  &shifthr RSHFT K   &weak LALT L   &weak RWIN SEMI  &none
             &none  &kp Z &kp X &kp C &kp V &kp B   &kp N &kp M  &kp COMMA &kp DOT &kp FSLH &none
             &lt 5 ESCAPE &lt 3 SPACE &lt 2 TAB   &lt 1 RET &kp BSPC &lt 4 SQT
             >;
