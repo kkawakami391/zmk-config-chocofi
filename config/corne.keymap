@@ -59,6 +59,19 @@
             require-prior-idle-ms = <125>;
             quick-tap-ms = <230>;
         };
+
+        macros {
+            enie: enie {
+                compatible = "zmk,behavior-macro";
+                #binding-cells = <0>;
+
+                bindings = <
+                &macro_press &kp RALT
+                &macro_tap &kp N
+                &macro_release &kp RALT
+                >;
+            };
+        };
     };
 
     combos {
@@ -84,6 +97,12 @@
             bindings = <&kp MINUS>;
             key-positions = <4 7>; // key: R, U
             timeout-ms = <40>;         // Más corto que tus HRM para evitar conflictos
+        };
+
+        enie_combo {
+            timeout-ms = <40>;
+            key-positions = <21 22>; // L + ;
+            bindings = <&enie>;
         };
     };
 
